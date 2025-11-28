@@ -19,13 +19,13 @@ This project demonstrates a combination of *secure access, RTC-based automation,
 ---
 
 ## 🎯 Features  
-- ⏰ *RTC-based Scheduling* – Messages appear automatically at set times.  
-- 🔑 *Admin Mode* – Secure access using external switch + password.  
-- 📋 *Message Management* – Enable/disable predefined messages.  
-- 🌡 *Temperature Display* – Shows real-time room temperature when idle.  
-- 💡 *LED Indicators* –  
-  - Green: Active scheduled message.  
-  - Red: Idle mode .   
+- ⏰ *RTC-based Scheduling* – Controls lights automatically between 6 PM to 6 AM  
+- 🌙 *LDR-Based Intensity Control* – Turns LEDs ON only when ambient light is low  
+- 🖥 *Real-Time Display* – Date, time, and day displayed on 16x2 LCD.  
+- 🔧 *Interrupt-Driven Admin Mode* – Edit RTC values using keypad.  
+- 🔢 *Keypad Input with Validation* – Hours, minutes, seconds, day, date, month, year
+- 💡 *LED Output Simulation* - Represents actual street-light behavior
+- 🔔 *Optional Buzzer Alerts*   
 
 ---
 
