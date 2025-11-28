@@ -1,0 +1,15 @@
+Dependencies for Project 'mini_proj', Target 'Target 1': (DO NOT MODIFY !)
+F (.\Startup.s)(0x69285788)(--cpu ARM7TDMI --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
+F (.\delay.c)(0x69285788)(-c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-o .\delay.o --omf_browse .\delay.crf --depend .\delay.d)
+F (.\mini_main.c)(0x6928585F)(-c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-o .\mini_main.o --omf_browse .\mini_main.crf --depend .\mini_main.d)
+I (C:\Keil\ARM\Inc\Philips\lpc21xx.h)(0x532C1500)
+I (mini_kpm_defines.h)(0x69285788)
+I (mini_lcd_defines.h)(0x69285788)
+I (delay.h)(0x69285788)
+I (types.h)(0x69285788)
+I (rtc_defines.h)(0x69285788)
+I (mini_adc_defines.h)(0x69285788)
+I (mini_macro_defines.h)(0x69285788)
+I (pin_connect_block.h)(0x69285788)
+F (.\pin_connect_block.c)(0x69285788)(-c --cpu ARM7TDMI -D__EVAL -g -O0 --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Philips-o .\pin_connect_block.o --omf_browse .\pin_connect_block.crf --depend .\pin_connect_block.d)
+I (C:\Keil\ARM\Inc\Philips\LPC21XX.h)(0x532C1500)

@@ -1,0 +1,10 @@
+.\mini_main.o: mini_main.c
+.\mini_main.o: C:\Keil\ARM\Inc\Philips\lpc21xx.h
+.\mini_main.o: mini_kpm_defines.h
+.\mini_main.o: mini_lcd_defines.h
+.\mini_main.o: delay.h
+.\mini_main.o: types.h
+.\mini_main.o: rtc_defines.h
+.\mini_main.o: mini_adc_defines.h
+.\mini_main.o: mini_macro_defines.h
+.\mini_main.o: pin_connect_block.h
