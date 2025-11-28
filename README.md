@@ -1,78 +1,90 @@
 # EventBoard - RTC-Driven Message Display System  
 
-## 📌 Overview  
-The *EventBoard* is a real-time automated message display system built using the *LPC2148 ARM7 microcontroller. It displays **predefined scrolling messages* on a 16x2 LCD at specific times using the *on-chip RTC (Real-Time Clock)*.  
+## 📌 Overview 
+EcoLight Maestro is a smart street-light automation system built using the LPC2148 ARM7 microcontroller.  
 
-The system includes:  
-- *Admin mode* with password-protected keypad access  
-- *Message scheduling* based on RTC  
-- *Room temperature monitoring* via LM35 sensor  
-- *LED indicators* for active/idle status  
-
-This project demonstrates a combination of *secure access, RTC-based automation, and environmental monitoring* in an embedded system.  
-
----
-
-## 🖼 Block Diagram    
-![Block Diagram](block_diagram.png)
+It controls LED street lights based on:  
+- RTC scheduled time (18:00–06:00) 
+- Real-time ambient light intensity using an LDR  
+ 
+The system improves power efficiency by enabling lights only when needed. It also features admin interrupt mode, RTC editing, LCD display, and a modular embedded-C firmware structure.  
  
 ---
 
 ## 🎯 Features  
-- ⏰ *RTC-based Scheduling* – Controls lights automatically between 6 PM to 6 AM  
-- 🌙 *LDR-Based Intensity Control* – Turns LEDs ON only when ambient light is low  
+- ⏰ *RTC-based Scheduling* – Controls lights automatically between 6 PM to 6 AM. 
+- 🌙 *LDR-Based Intensity Control* – Turns LEDs ON only when ambient light is low.  
 - 🖥 *Real-Time Display* – Date, time, and day displayed on 16x2 LCD.  
 - 🔧 *Interrupt-Driven Admin Mode* – Edit RTC values using keypad.  
-- 🔢 *Keypad Input with Validation* – Hours, minutes, seconds, day, date, month, year
-- 💡 *LED Output Simulation* - Represents actual street-light behavior
+- 🔢 *Keypad Input with Validation* – Hours, minutes, seconds, day, date, month, year.
+- 💡 *LED Output Simulation* - Represents actual street-light behavior.
 - 🔔 *Optional Buzzer Alerts*   
 
 ---
 
-## 🖥 Hardware Requirements  
-- *LPC2148 Microcontroller*  
+## 🖥 Hardware Requirements 
+Supporting passive components
+
+- *LPC2148 ARM7 Microcontroller*  
 - *16x2 LCD Display*  
-- *Keypad*  
-- *LEDs (Red/Green)*  
-- *LM35 Temperature Sensor*   
+- *4x4 Keypad*  
+- *LDR (Light Dependent Resistor)*  
+- *LEDs (Street Light Simulation)*
+- *Buzzer (Optional)*  
 
 ---
 
-## 💾 Software Requirements  
+## 💾 Software Requirements 
 - Embedded C  
 - *Keil µVision (C Compiler)*  
 - *Flash Magic* (for programming LPC2148)  
 
 ---
 
-## 🔄 System Workflow  
-1. At startup, all messages are enabled by default.  
-2. The RTC checks system time.  
-3. If a scheduled message matches current time → display message (scrolling) + Green LED ON.  
-4. If no active message → show *RTC time + Room Temperature* + Red LED ON.  
-5. Admins can press a switch → enter *password-protected mode* → update RTC time or enable/disable specific messages.  
+## 🔄 System Workflow 
 
+1. Initialize LCD, ADC, RTC, keypad, LEDs, and external interrupt.  
+2. In the main loop:
+   - Read RTC time, date, and day
+   - Display on LCD
+3. If time is between 18:00 and 06:00:
+   - Read LDR using ADC
+   - If light < threshold → Lights ON
+   - Else → Lights OFF
+4. Otherwise → Lights remain OFF
+5. When interrupt button is pressed:
+   - Enter Admin Mode
+   - Display menu:
+     1. EDIT RTC INFO
+     2. EXIT
+6. If the user chooses EDIT:
+   - Enter fields: Hours, Minutes, Seconds, Day, Date, Month, Year
+   - Validate each input
+   - Update RTC registers upon valid entry
+7. Return to main loop and resume automatic operation.  
+  
 ---
 
 ## 📂 Project File Structure & Descriptions
 
-    |-- Event_Board_Main.c         # Main program file – contains main() function, integrates LCD, keypad, RTC, ADC, and settings modules
+    |-- EcoLight_Main.c              # Main loop, RTC & ADC logic
     |
-    |--lcd.c / lcd.h               # LCD driver – initialization, sending commands/data, displaying characters, strings, integers on the LCD  
+    |--lcd.c / lcd.h                # LCD display driver  
     |
-    |--kpm.c / kpm.h               # Keypad driver – initialization, scanning columns/rows, detecting key press, reading numeric and password inputs  
+    |--keypad.c / keypad.h          # Keypad scanning and input handling  
     |
-    |-- adc.c / adc.h              # ADC module – initialization, reading analog values (LM35 temperature sensor), returning digital values
+    |-- adc.c / adc.h                # ADC driver for LDR reading
     |
-    |-- rtc.c / rtc.h              # RTC module – initialization of clock, setting/retrieving current time/date, displaying on LCD
+    |-- rtc.c / rtc.h                # RTC initialization, get/set time-date
     |  
-    |-- settings.c / settings.h    # Settings handler – edit/update time/date, manage stored values, save changes via keypad  
+    |-- settings.c / settings.h      # RTC editing menu logic and validation  
     |  
-    |-- delay.c / delay.h          # Delay utilities – software delay functions (ms/sec), used in LCD and keypad operations  
+    |-- interrupt.c / interrupt.h    # External interrupt for admin mode  
     |  
-    |-- pin_connect_block.c / .h   # Pin configuration – configures microcontroller pins for LCD, keypad, ADC, RTC  
+    |-- delay.c / delay.h            # Delay utility functions  
     |  
-    |-- defines.h / types.h /  
-    |   interrupts_defines.h       # Common headers – macros, type definitions, and interrupt vectors shared across modules 
-    
+    |--pin_config.c / pin_config.h  # PINSEL and GPIO configuration
+    |
+    |--defines.h / types.h          # Common macros and data types
+    |
 ---
